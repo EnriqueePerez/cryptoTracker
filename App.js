@@ -8,9 +8,14 @@
 
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import CoinsStack from 'crytoTracker/src/components/coins/CoinsStack';
 
 const App = () => {
-  return <NavigationContainer></NavigationContainer>;
+  return (
+    <NavigationContainer>
+      <CoinsStack />
+    </NavigationContainer>
+  );
 };
 
 // const styles = StyleSheet.create({
