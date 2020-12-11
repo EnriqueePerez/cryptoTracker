@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {useCoins} from 'crytoTracker/src/hooks/useCoins.js';
 import CoinsItem from './CoinsItem';
+import Colors from 'crytoTracker/src/res/colors';
 
 const CoinsScreen = (props) => {
   const [coins, setCoins] = useCoins();
@@ -40,7 +41,7 @@ const CoinsScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.blackPearl,
   },
   titleText: {
     color: 'white',
