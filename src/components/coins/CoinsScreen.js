@@ -14,25 +14,27 @@ import Colors from 'crytoTracker/src/res/colors';
 const CoinsScreen = (props) => {
   const [coins, setCoins] = useCoins();
 
-  const handlePress = () => {
+  const handlePress = (coin) => {
     // console.log('go to detail', props);
-    props.navigation.navigate('CoinDetail');
+    props.navigation.navigate('CoinDetail', {coin}); //navigating to coinDetail and passing the coin info
     // navigation.navigate('Component' {SomeValue: 1}); is also posible is destructuring props
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>Coins Screen</Text>
+      {/* <Text style={styles.titleText}>Coins Screen</Text>
       <Pressable style={styles.btn} onPress={handlePress}>
         <Text style={styles.btnText}>Ir a detail</Text>
-      </Pressable>
+      </Pressable> */}
       {coins !== undefined ? (
         <FlatList
           data={coins}
-          renderItem={({item}) => <CoinsItem item={item} />}
+          renderItem={({item}) => (
+            <CoinsItem item={item} onPress={() => handlePress(item)} />
+          )}
         />
       ) : (
-        <ActivityIndicator style={styles.loader} color="#000" size="large" />
+        <ActivityIndicator style={styles.loader} color="#fff" size="large" />
       )}
     </View>
   );
