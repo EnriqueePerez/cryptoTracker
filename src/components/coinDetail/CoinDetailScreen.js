@@ -1,9 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import {View, Image, Text, SectionList, StyleSheet} from 'react-native';
+import React, {useEffect, useState, useRef} from 'react';
+import {
+  View,
+  Image,
+  Text,
+  SectionList,
+  FlatList,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import Colors from '../../res/colors';
+import Http from '../../libs/http';
+import CoinMarketScreen from '../coinDetail/CoinMarketScreen';
 
 const CoinDetailScreen = ({route, navigation}) => {
   const [coin, setCoin] = useState(route.params.coin);
+  const [markets, setMarkets] = useState();
+  const flatListRef = useRef(null);
 
   //func to get icon symbol from another api depending on the name
   const getSymbolIcon = (nameid) => {
@@ -32,8 +44,17 @@ const CoinDetailScreen = ({route, navigation}) => {
     return sections;
   };
 
+  const getMarkets = async (coinId) => {
+    const url = `https://api.coinlore.net/api/coin/markets/?id=${coinId}`;
+
+    const markets = await Http.instance.get(url);
+
+    setMarkets(markets);
+  };
+
   useEffect(() => {
     navigation.setOptions({title: coin.symbol}); //setting title with coin name
+    getMarkets(coin.id);
     // console.log('coin', props.route.params);
   }, []);
   return (
@@ -46,6 +67,7 @@ const CoinDetailScreen = ({route, navigation}) => {
         <Text style={styles.titleText}>{coin.name}</Text>
       </View>
       <SectionList
+        style={styles.section}
         sections={getSections(coin)}
         keyExtractor={({item}) => item}
         renderItem={({item}) => (
@@ -59,6 +81,20 @@ const CoinDetailScreen = ({route, navigation}) => {
           </View>
         )}
       />
+
+      <Text style={styles.marketsTitle}>Markets</Text>
+      {markets === null ? (
+        <ActivityIndicator style={styles.loader} color="#fff" size="large" />
+      ) : (
+        <FlatList
+          ref={(ref) => (ref = flatListRef)}
+          style={styles.list}
+          horizontal={true}
+          data={markets}
+          keyExtractor={(item) => `${item.base}-${item.name}-${item.quote}`}
+          renderItem={({item}) => <CoinMarketScreen item={item} />}
+        />
+      )}
     </View>
   );
 };
@@ -85,6 +121,13 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
+  section: {
+    maxHeight: 220,
+  },
+  list: {
+    maxHeight: 100,
+    paddingLeft: 16,
+  },
   sectionHeader: {
     backgroundColor: 'rgba(0,0,0,0.2)',
     padding: 8,
@@ -102,6 +145,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  marketsTitle: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    marginLeft: 16,
+  },
+  loader: {
+    marginTop: 60,
   },
 });
 export default CoinDetailScreen;

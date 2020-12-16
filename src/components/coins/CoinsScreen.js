@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 import {useCoins} from 'crytoTracker/src/hooks/useCoins.js';
 import CoinsItem from './CoinsItem';
+import CoinsSearch from './CoinsSearch';
 import Colors from 'crytoTracker/src/res/colors';
 
 const CoinsScreen = (props) => {
-  const [coins, setCoins] = useCoins();
+  const [coins, allCoins, setCoins] = useCoins();
 
   const handlePress = (coin) => {
     // console.log('go to detail', props);
@@ -20,8 +21,20 @@ const CoinsScreen = (props) => {
     // navigation.navigate('Component' {SomeValue: 1}); is also posible is destructuring props
   };
 
+  const handleSearch = (query) => {
+    const coinsFiltered = allCoins.filter((coin) => {
+      return (
+        coin.name.toLowerCase().includes(query.toLowerCase()) ||
+        coin.symbol.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    setCoins(coinsFiltered);
+  };
+
   return (
     <View style={styles.container}>
+      <CoinsSearch onChange={handleSearch} />
       {/* <Text style={styles.titleText}>Coins Screen</Text>
       <Pressable style={styles.btn} onPress={handlePress}>
         <Text style={styles.btnText}>Ir a detail</Text>

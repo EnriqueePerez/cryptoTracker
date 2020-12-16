@@ -7,12 +7,14 @@ export const useCoins = () => {
   const urlAPI = 'https://api.coinlore.net/api/tickers/';
 
   const [coins, setCoins] = useState();
+  const [allCoins, setAllCoins] = useState();
 
   //calling api and setting on useState
   const callAPI = async () => {
-    const coins = await Http.instance.get(urlAPI);
+    let fetch = await Http.instance.get(urlAPI);
 
-    setCoins(coins.data);
+    setCoins(fetch.data);
+    setAllCoins(fetch.data);
     // console.log('coins', coins);
   };
   useEffect(() => {
@@ -20,5 +22,5 @@ export const useCoins = () => {
   }, []);
 
   //exposing the variable and its changing value function
-  return [coins, setCoins];
+  return [coins, allCoins, setCoins];
 };
