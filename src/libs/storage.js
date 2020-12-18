@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Storage {
-  static instance = Storage();
+  static instance = new Storage();
 
   store = async (key, value) => {
     try {
@@ -16,7 +16,7 @@ class Storage {
 
   get = async (key) => {
     try {
-      await AsyncStorage.getItem(key);
+      return await AsyncStorage.getItem(key);
     } catch (err) {
       console.log('storage get err', err);
 

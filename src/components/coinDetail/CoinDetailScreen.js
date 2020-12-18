@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import Colors from '../../res/colors';
 import Http from '../../libs/http';
-import CoinMarketScreen from '../coinDetail/CoinMarketScreen';
+import CoinMarketScreen from './CoinMarketScreen';
+import FavoriteButton from './FavoriteButton';
 
 const CoinDetailScreen = ({route, navigation}) => {
   const [coin, setCoin] = useState(route.params.coin);
@@ -53,7 +54,10 @@ const CoinDetailScreen = ({route, navigation}) => {
   };
 
   useEffect(() => {
-    navigation.setOptions({title: coin.symbol}); //setting title with coin name
+    navigation.setOptions({
+      title: coin.symbol,
+      headerRight: () => <FavoriteButton coin={coin} />,
+    }); //setting title with coin name
     getMarkets(coin.id);
     // console.log('coin', props.route.params);
   }, []);
