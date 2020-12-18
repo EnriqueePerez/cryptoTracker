@@ -5,9 +5,9 @@ import Colors from '../../res/colors';
 const CoinsItem = ({item, onPress}) => {
   const getImgArrow = () => {
     if (item.percent_change_1h > 0) {
-      return require('crytoTracker/src/assets/arrow_up.png');
+      return require('../../assets/arrow_up.png');
     } else {
-      return require('crytoTracker/src/assets/arrow_down.png');
+      return require('../../assets/arrow_up.png');
     }
   };
   return (

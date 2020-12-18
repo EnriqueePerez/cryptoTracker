@@ -7,10 +7,10 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import {useCoins} from 'crytoTracker/src/hooks/useCoins.js';
+import {useCoins} from '../../hooks/useCoins';
 import CoinsItem from './CoinsItem';
 import CoinsSearch from './CoinsSearch';
-import Colors from 'crytoTracker/src/res/colors';
+import Colors from '../../res/colors';
 
 const CoinsScreen = (props) => {
   const [coins, allCoins, setCoins] = useCoins();
