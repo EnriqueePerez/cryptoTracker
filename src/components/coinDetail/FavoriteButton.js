@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Pressable, View, Text, StyleSheet, Image} from 'react-native';
+import {Pressable, View, StyleSheet, Image} from 'react-native';
 import Storage from '../../libs/storage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FavoriteButton = ({coin}) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -15,36 +14,27 @@ const FavoriteButton = ({coin}) => {
   };
 
   const checkFavorite = async () => {
-    try {
-      const key = `favorite-${coin.id}`;
-      // console.log(key);
-      const checking = await Storage.instance.get(key);
-      //   const checking = await Storage.instance.getAllKeys();
-      //   console.log('data in the storage', checking);
+    const key = `favorite-${coin.id}`;
+    // console.log(key);
+    const checking = await Storage.instance.get(key);
+    //   const checking = await Storage.instance.getAllKeys();
+    //   console.log('data in the storage', checking);
 
-      //if its in favorite, showing the star
-      if (checking !== null) {
-        setIsFavorite(true);
-        // console.log('coin is added to favorites');
-      }
-    } catch (err) {
-      console.log('checkFavorite err', err);
+    //if its in favorite, showing the star
+    if (checking !== null) {
+      setIsFavorite(true);
+      // console.log('coin is added to favorites');
     }
   };
 
   const addFavorite = async () => {
-    try {
-      const key = `favorite-${coin.id}`;
+    const key = `favorite-${coin.id}`;
+    const stored = await Storage.instance.store(key, JSON.stringify(coin));
+    //   const stored = await AsyncStorage.setItem(key, JSON.stringify(coin));
 
-      const stored = await Storage.instance.store(key, JSON.stringify(coin));
-      //   const stored = await AsyncStorage.setItem(key, JSON.stringify(coin));
-
-      if (stored) {
-        setIsFavorite(true);
-        // console.log('dato añadido a favoritos');
-      }
-    } catch (err) {
-      console.log('addFavorite err', err);
+    if (stored) {
+      setIsFavorite(true);
+      // console.log('dato añadido a favoritos');
     }
   };
 
@@ -61,6 +51,7 @@ const FavoriteButton = ({coin}) => {
   useEffect(() => {
     checkFavorite();
   }, [isFavorite]);
+
   return (
     <View>
       <Pressable style={styles.button} onPress={() => handlePress()}>
