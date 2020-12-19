@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "crytoTracker.app"
-               BlueprintName = "crytoTracker"
-               ReferencedContainer = "container:crytoTracker.xcodeproj">
+               BuildableName = "cryptoTracker.app"
+               BlueprintName = "cryptoTracker"
+               ReferencedContainer = "container:cryptoTracker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "crytoTrackerTests.xctest"
-               BlueprintName = "crytoTrackerTests"
-               ReferencedContainer = "container:crytoTracker.xcodeproj">
+               BuildableName = "cryptoTrackerTests.xctest"
+               BlueprintName = "cryptoTrackerTests"
+               ReferencedContainer = "container:cryptoTracker.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "crytoTracker.app"
-            BlueprintName = "crytoTracker"
-            ReferencedContainer = "container:crytoTracker.xcodeproj">
+            BuildableName = "cryptoTracker.app"
+            BlueprintName = "cryptoTracker"
+            ReferencedContainer = "container:cryptoTracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "crytoTracker.app"
-            BlueprintName = "crytoTracker"
-            ReferencedContainer = "container:crytoTracker.xcodeproj">
+            BuildableName = "cryptoTracker.app"
+            BlueprintName = "cryptoTracker"
+            ReferencedContainer = "container:cryptoTracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
