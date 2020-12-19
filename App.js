@@ -5,12 +5,13 @@ import CoinsStack from './src/components/coins/CoinsStack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Colors from './src/res/colors';
 import FavoritesStack from './src/components/favorites/FavoritesStack';
+import {DarkTheme} from '@react-navigation/native';
 
 const Tabs = createBottomTabNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <Tabs.Navigator
         tabBarOptions={{
           tintColor: '#fefefe',
